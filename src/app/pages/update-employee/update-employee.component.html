@@ -1,0 +1,49 @@
+<div class="container my-5">
+  <div class="row d-flex justify-content-center">
+    <div class="col-8 ">
+      <form [formGroup]="formEmployee" (ngSubmit)="handleFormEmployee()" #formDir="ngForm">
+        <div class="mb-3">
+          <label for="name" class="form-label">Nome</label>
+          <input type="text" class="form-control" id="name" formControlName="name" >
+          <div *ngIf="verificaFormEmployee.name?.invalid && formDir.submitted">
+              <p *ngIf="verificaFormEmployee.name?.errors?.['required']"> Nome é obrigatório!</p>
+              <p *ngIf="verificaFormEmployee.name?.errors?.['minlength']"> Nome deve ter no minimo 2 caracteres!</p>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" class="form-control" id="email" formControlName="email">
+          <div *ngIf="verificaFormEmployee.email?.invalid && formDir.submitted">
+            <p *ngIf="verificaFormEmployee.email?.errors?.['required']"> Email é obrigatório!</p>
+            <p *ngIf="verificaFormEmployee.email?.errors?.['email']"> Email deve ser valido!</p>
+        </div>
+        </div>
+        <div class="mb-3">
+          <label for="phone" class="form-label">Celular</label>
+          <input type="text" class="form-control" id="phone" formControlName="phone">
+          <div *ngIf="verificaFormEmployee.phone?.invalid && formDir.submitted">
+            <p *ngIf="verificaFormEmployee.phone?.errors?.['required']"> Telefone é obrigatório!</p>
+            <p *ngIf="verificaFormEmployee.phone?.errors?.['minlength']"> Telefone deve ter no minimo 11 caracteres e maximo 11!</p>
+        </div>
+        </div>
+        <div class="mb-3">
+          <label for="salary" class="form-label">Salário</label>
+          <input type="number" class="form-control" id="salary" formControlName="salary">
+          <div *ngIf="verificaFormEmployee.salary?.invalid && formDir.submitted">
+            <p *ngIf="verificaFormEmployee.salary?.errors?.['required']"> Salário é obrigatório!</p>
+          </div>
+        </div>
+        <div class="mb-3">
+          <select class="form-select" formControlName="departmentId">
+            <option value="" selected>Departamentos</option>
+            <option *ngFor="let item of departments" [value]="item.id">{{item.name}}</option>
+          </select>
+          <div *ngIf="verificaFormEmployee.departmentId?.invalid && formDir.submitted">
+            <p *ngIf="verificaFormEmployee.departmentId?.errors?.['required']"> Departamento é obrigatório!</p>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary mt-4 btn-save"  >Salvar</button>
+      </form>
+    </div>
+  </div>
+</div>
